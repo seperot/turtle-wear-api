@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"github.com/aws/aws-lambda-go/lambda"
 	"trtlFunctions/priceCalculator"
 )
 
@@ -21,5 +20,4 @@ func show() (*coinValue, error) {
 
 func main() {
 	fmt.Println(show())
-	lambda.Start(show)
 }

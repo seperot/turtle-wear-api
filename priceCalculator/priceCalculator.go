@@ -8,8 +8,8 @@ const ExchangeKu int = 2
 
 func PriceCalc(currency string, exchange int) string {
 	exchangePrice, _ := strconv.ParseFloat(parseExchange(exchange), 64)
-	result := strconv.FormatFloat(btcFiatPrice(currency) * exchangePrice, 'f', 9, 64)
-	return result
+	fiatPrice, _ := strconv.ParseFloat(btcFiatPrice(currency), 64)
+	return strconv.FormatFloat(fiatPrice * exchangePrice, 'f', 9, 64)
 }
 
 func parseExchange(exchange int) string {
