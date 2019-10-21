@@ -1,7 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"encoding/json"
+	"log"
+	"net/http"
 	"trtlFunctions/priceCalculator"
 )
 
@@ -10,14 +12,23 @@ type coinValue struct {
 	Btc string `json:"BTC"`
 }
 
-func show() (*coinValue, error) {
-	bk := &coinValue{
-		Usd: "$" + priceCalculator.PriceCalc("USD", priceCalculator.ExchangeOgre),
-		Btc: "₿" + priceCalculator.PriceCalc("BTC", priceCalculator.ExchangeOgre),
+
+func serveCoinValue(w http.ResponseWriter, r *http.Request) {
+	coinval := coinValue{"$" + priceCalculator.PriceCalc("USD", priceCalculator.ExchangeOgre),
+		"₿" + priceCalculator.PriceCalc("BTC", priceCalculator.ExchangeOgre)}
+
+	js, err := json.Marshal(coinval)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
-	return bk, nil
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
 }
 
 func main() {
-	fmt.Println(show())
+	http.HandleFunc("/", serveCoinValue)
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
