@@ -7,16 +7,8 @@ import (
 	"net/http"
 )
 
-type coinValue struct {
-	Usd string `json:"USD"`
-	Btc string `json:"BTC"`
-}
-
 func serveCoinValue(w http.ResponseWriter, r *http.Request) {
-	coinval := coinValue{"$" + priceCalculator.PriceCalc("USD", priceCalculator.ExchangeOgre),
-		"₿" + priceCalculator.PriceCalc("BTC", priceCalculator.ExchangeOgre)}
-
-	js, err := json.Marshal(coinval)
+	js, err := json.Marshal(priceCalculator.PriceCalc())
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -25,10 +17,10 @@ func serveCoinValue(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
-		w.Write(js)
+		_ , err = w.Write(js)
 	default:
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte(`{"message": "not found"}`))
+		_ , err = w.Write([]byte(`{"error": "command not found"}`))
 	}
 }
 

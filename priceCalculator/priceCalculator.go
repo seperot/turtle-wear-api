@@ -3,22 +3,20 @@ package priceCalculator
 import (
 	"strconv"
 )
-const ExchangeOgre int = 1
-const ExchangeKu int = 2
 
-func PriceCalc(currency string, exchange int) string {
-	exchangePrice, _ := strconv.ParseFloat(parseExchange(exchange), 64)
-	fiatPrice, _ := strconv.ParseFloat(btcFiatPrice(currency), 64)
-	return strconv.FormatFloat(fiatPrice * exchangePrice, 'f', 9, 64)
+type CoinValue struct {
+	Usd string `json:"USD"`
+	Btc string `json:"BTC"`
 }
 
-func parseExchange(exchange int) string {
-	switch exchange {
-	case 1:
-		return tradeOgre()
-	case 2:
-		return kuCoin()
-	default:
-		return "0"
+func PriceCalc() CoinValue {
+	fiatPrice, _ := strconv.ParseFloat(btcFiatPrice("USD"), 64)
+	exchangePrice, exchangePriceErr := strconv.ParseFloat(tradeOgre(), 64)
+	if exchangePriceErr != nil {
+		exchangeAltPrice, _ := strconv.ParseFloat(kuCoin(), 64)
+		return CoinValue{"$" + strconv.FormatFloat(fiatPrice * exchangeAltPrice, 'f', 9, 64),
+			"₿" + strconv.FormatFloat(exchangeAltPrice,'f',9, 64)}
 	}
+	return CoinValue{"$" + strconv.FormatFloat(fiatPrice * exchangePrice, 'f', 9, 64),
+		"₿" + strconv.FormatFloat(exchangePrice,'f',9, 64)}
 }

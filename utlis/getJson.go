@@ -30,7 +30,7 @@ func GetJsonMap(url string) map[string]interface{} {
 		log.Fatal(readErr)
 	}
 
-	jsonErr := json.Unmarshal([]byte(body), &result)
+	jsonErr := json.Unmarshal(body, &result)
 	if jsonErr != nil {
 		log.Fatal(jsonErr)
 	}
