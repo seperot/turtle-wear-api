@@ -2,7 +2,7 @@ package priceCalculator
 
 import (
 	"fmt"
-	"trtlFunctions/utlis"
+	"github.com/seperot/turtle-wear-api.git/utlis"
 )
 
 func tradeOgre() string {

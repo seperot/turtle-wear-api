@@ -2,9 +2,9 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/seperot/turtle-wear-api.git/priceCalculator"
 	"log"
 	"net/http"
-	"trtlFunctions/priceCalculator"
 )
 
 type coinValue struct {
