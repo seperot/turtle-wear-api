@@ -12,7 +12,6 @@ type coinValue struct {
 	Btc string `json:"BTC"`
 }
 
-
 func serveCoinValue(w http.ResponseWriter, r *http.Request) {
 	coinval := coinValue{"$" + priceCalculator.PriceCalc("USD", priceCalculator.ExchangeOgre),
 		"₿" + priceCalculator.PriceCalc("BTC", priceCalculator.ExchangeOgre)}
@@ -22,10 +21,15 @@ func serveCoinValue(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	w.WriteHeader(http.StatusOK)
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(js)
+	switch r.Method {
+	case "GET":
+		w.WriteHeader(http.StatusOK)
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(js)
+	default:
+		w.WriteHeader(http.StatusNotFound)
+		w.Write([]byte(`{"message": "not found"}`))
+	}
 }
 
 func main() {
