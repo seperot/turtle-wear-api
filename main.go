@@ -20,7 +20,7 @@ func serveCoinValue(w http.ResponseWriter, r *http.Request) {
 		_ , err = w.Write(js)
 	default:
 		w.WriteHeader(http.StatusNotFound)
-		_ , err = w.Write([]byte(`{"error": "command not found"}`))
+		_ , err = w.Write([]byte(`{"error": "nothing found"}`))
 	}
 }
 
