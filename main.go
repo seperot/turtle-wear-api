@@ -26,5 +26,5 @@ func serveCoinValue(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/", serveCoinValue)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":3000", nil))
 }
