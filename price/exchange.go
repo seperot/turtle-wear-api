@@ -1,4 +1,4 @@
-package priceCalculator
+package price
 
 import (
 	"fmt"

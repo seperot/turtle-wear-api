@@ -2,13 +2,13 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/seperot/turtle-wear-api.git/priceCalculator"
+	"github.com/seperot/turtle-wear-api.git/price"
 	"log"
 	"net/http"
 )
 
 func serveCoinValue(w http.ResponseWriter, r *http.Request) {
-	js, err := json.Marshal(priceCalculator.PriceCalc())
+	js, err := json.Marshal(price.PriceCalc())
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
