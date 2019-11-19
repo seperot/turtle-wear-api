@@ -9,7 +9,7 @@ type CoinValue struct {
 	Btc string `json:"BTC"`
 }
 
-func PriceCalc() CoinValue {
+func Calc() CoinValue {
 	fiatPrice, _ := strconv.ParseFloat(btcFiatPrice("USD"), 64)
 	exchangePrice, exchangePriceErr := strconv.ParseFloat(tradeOgre(), 64)
 	if exchangePriceErr != nil {
