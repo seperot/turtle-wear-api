@@ -10,8 +10,10 @@ import (
 
 func handleEvent() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var js []byte
-		var err error
+		var (
+			js []byte
+			err error
+		)
 
 		switch r.URL.Path {
 		case "/coin":
