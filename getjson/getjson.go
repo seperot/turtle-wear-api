@@ -1,4 +1,4 @@
-package utlis
+package getjson
 
 import (
 	"encoding/json"
@@ -8,7 +8,9 @@ import (
 	"time"
 )
 
-func GetJsonMap(url string) map[string]interface{} {
+type RetrieveJson func(fullUrl string) map[string]interface{}
+
+func Map(url string) map[string]interface{} {
 	var result map[string]interface{}
 
 	client := http.Client{

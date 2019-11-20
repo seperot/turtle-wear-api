@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"github.com/seperot/turtle-wear-api.git/getjson"
 	"github.com/seperot/turtle-wear-api.git/price"
 	"github.com/seperot/turtle-wear-api.git/weather"
 	"log"
@@ -17,7 +18,7 @@ func handleEvent() http.HandlerFunc {
 
 		switch r.URL.Path {
 		case "/coin":
-			js, err = json.Marshal(price.Calc())
+			js, err = json.Marshal(price.Calc(price.TradeOgre, price.BtcFiatPrice))
 		case "/weather":
 			lat := r.Header.Get("lat")
 			lon := r.Header.Get("lon")
@@ -25,7 +26,7 @@ func handleEvent() http.HandlerFunc {
 				http.Error(w, "Missing Lat Lon Headers", http.StatusInternalServerError)
 				return
 			}
-			js, err = json.Marshal(weather.Getter(lat, lon))
+			js, err = json.Marshal(weather.Getter(lat, lon, weather.OpenWeather, getjson.Map))
 		default:
 			http.Error(w, "Unknown Response Error", http.StatusInternalServerError)
 			return

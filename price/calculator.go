@@ -9,14 +9,12 @@ type CoinValue struct {
 	Btc string `json:"BTC"`
 }
 
-func Calc() CoinValue {
-	fiatPrice, _ := strconv.ParseFloat(btcFiatPrice("USD"), 64)
-	exchangePrice, exchangePriceErr := strconv.ParseFloat(tradeOgre(), 64)
-	if exchangePriceErr != nil {
-		exchangeAltPrice, _ := strconv.ParseFloat(kuCoin(), 64)
-		return CoinValue{"$" + strconv.FormatFloat(fiatPrice * exchangeAltPrice, 'f', 9, 64),
-			"₿" + strconv.FormatFloat(exchangeAltPrice,'f',9, 64)}
-	}
+type CryptoFunc func() string
+type FiatFunc func(fiat string) string
+
+func Calc(cryptoFn CryptoFunc, fiatFn FiatFunc) CoinValue {
+	fiatPrice, _ := strconv.ParseFloat(fiatFn("USD"), 64)
+	exchangePrice, _ := strconv.ParseFloat(cryptoFn(), 64)
 	return CoinValue{"$" + strconv.FormatFloat(fiatPrice * exchangePrice, 'f', 9, 64),
 		"₿" + strconv.FormatFloat(exchangePrice,'f',9, 64)}
 }
