@@ -1,18 +1,21 @@
 package price
 
-import "testing"
+import (
+	"github.com/seperot/turtle-wear-api.git/getjson"
+	"testing"
+)
 
 func TestCalc(t *testing.T) {
-	result := Calc(testCrypto, testFiat)
+	result := Calc(testCrypto, testFiat, getjson.Map)
 	if result.Usd != "$0.030703290"{
 		t.Error("got", result)
 	}
 }
 
-func testCrypto() string {
+func testCrypto(json getjson.RetrieveJson) string {
 return "0.000003"
 }
 
-func testFiat(currency string) string {
+func testFiat(currency string, json getjson.RetrieveJson) string {
 return "10234.43"
 }

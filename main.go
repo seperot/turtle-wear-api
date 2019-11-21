@@ -5,7 +5,6 @@ import (
 	"github.com/seperot/turtle-wear-api.git/getjson"
 	"github.com/seperot/turtle-wear-api.git/price"
 	"github.com/seperot/turtle-wear-api.git/weather"
-	"log"
 	"net/http"
 )
 
@@ -18,7 +17,7 @@ func handleEvent() http.HandlerFunc {
 
 		switch r.URL.Path {
 		case "/coin":
-			js, err = json.Marshal(price.Calc(price.TradeOgre, price.BtcFiatPrice))
+			js, err = json.Marshal(price.Calc(price.TradeOgre, price.BtcFiatPrice, getjson.Map))
 		case "/weather":
 			lat := r.Header.Get("lat")
 			lon := r.Header.Get("lon")
@@ -50,7 +49,5 @@ func handleEvent() http.HandlerFunc {
 }
 
 func main() {
-	http.HandleFunc("/coin", handleEvent())
-	http.HandleFunc("/weather", handleEvent())
-	log.Fatal(http.ListenAndServe(":3000", nil))
+	panic(http.ListenAndServe(":3000", handleEvent()))
 }
