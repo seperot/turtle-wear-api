@@ -2,7 +2,7 @@ package price
 
 import (
 	"fmt"
-	"github.com/seperot/turtle-wear-api.git/getjson"
+	"github.com/seperot/turtle-wear-api.git/pkg/getjson"
 )
 
 func TradeOgre(json getjson.RetrieveJson) string {

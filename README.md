@@ -2,4 +2,4 @@
 Simple api calls for [turtle-wear](https://github.com/seperot/turtle-wear)
 
 ## Flow
-![flowmap](flowmap.png)
+![flowmap](docs/flowmap.png)

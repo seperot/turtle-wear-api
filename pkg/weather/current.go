@@ -1,6 +1,8 @@
 package weather
 
-import "github.com/seperot/turtle-wear-api.git/getjson"
+import (
+	"github.com/seperot/turtle-wear-api.git/pkg/getjson"
+)
 
 type CurrentWeather struct {
 	Temp string `json:"Temp"`

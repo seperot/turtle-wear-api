@@ -2,9 +2,9 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/seperot/turtle-wear-api.git/getjson"
-	"github.com/seperot/turtle-wear-api.git/price"
-	"github.com/seperot/turtle-wear-api.git/weather"
+	"github.com/seperot/turtle-wear-api.git/pkg/getjson"
+	"github.com/seperot/turtle-wear-api.git/pkg/price"
+	"github.com/seperot/turtle-wear-api.git/pkg/weather"
 	"net/http"
 )
 
@@ -48,5 +48,8 @@ func handleEvent() http.HandlerFunc {
 }
 
 func main() {
-	panic(http.ListenAndServe(":3000", handleEvent()))
+	err := http.ListenAndServe(":3000", handleEvent())
+	if err != nil {
+		panic(err)
+	}
 }

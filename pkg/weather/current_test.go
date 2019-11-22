@@ -1,7 +1,7 @@
 package weather
 
 import (
-	"github.com/seperot/turtle-wear-api.git/getjson"
+	"github.com/seperot/turtle-wear-api.git/pkg/getjson"
 	"testing"
 )
 

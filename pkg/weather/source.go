@@ -2,7 +2,7 @@ package weather
 
 import (
 	"fmt"
-	"github.com/seperot/turtle-wear-api.git/getjson"
+	"github.com/seperot/turtle-wear-api.git/pkg/getjson"
 )
 
 func OpenWeather(lat string, lon string, json getjson.RetrieveJson) (string, string) {
