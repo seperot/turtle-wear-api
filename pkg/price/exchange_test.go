@@ -3,6 +3,7 @@ package price
 import (
 	"encoding/json"
 	"log"
+	"net/http"
 	"testing"
 )
 
@@ -32,7 +33,7 @@ func Test_kuCoin(t *testing.T) {
 	}
 }
 
-func testJsonRetriever(fullUrl string) map[string]interface{} {
+func testJsonRetriever(fullUrl string, client *http.Client) map[string]interface{} {
 	var result map[string]interface{}
 	jsonErr := json.Unmarshal(stubbedResponse, &result)
 	if jsonErr != nil {

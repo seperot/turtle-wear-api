@@ -3,6 +3,7 @@ package weather
 import (
 	"encoding/json"
 	"log"
+	"net/http"
 	"testing"
 )
 
@@ -13,7 +14,7 @@ if result != "test" || result2 != "47" {
 }
 }
 
-func testJsonRetriever(fullUrl string) map[string]interface{} {
+func testJsonRetriever(fullUrl string, client *http.Client) map[string]interface{} {
 	stubbedResponse := []byte(`{"weather": [{"main": "test"}, {"main": "fail"}],"main": {"temp": 47}}`)
 	var result map[string]interface{}
 	jsonErr := json.Unmarshal(stubbedResponse, &result)

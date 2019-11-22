@@ -5,17 +5,12 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"time"
 )
 
-type RetrieveJson func(fullUrl string) map[string]interface{}
+type RetrieveJson func(fullUrl string, client *http.Client) map[string]interface{}
 
-func Map(url string) map[string]interface{} {
+func Map(url string, client *http.Client) map[string]interface{} {
 	var result map[string]interface{}
-
-	client := http.Client{
-		Timeout: time.Second * 2,
-	}
 
 	req, err := http.NewRequest(http.MethodGet, url, nil)
 	if err != nil {

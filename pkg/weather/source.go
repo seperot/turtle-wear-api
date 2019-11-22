@@ -3,6 +3,8 @@ package weather
 import (
 	"fmt"
 	"github.com/seperot/turtle-wear-api.git/pkg/getjson"
+	"net/http"
+	"time"
 )
 
 func OpenWeather(lat string, lon string, json getjson.RetrieveJson) (string, string) {
@@ -14,7 +16,10 @@ func OpenWeather(lat string, lon string, json getjson.RetrieveJson) (string, str
 	latitude := "lat=" + lat
 	longitude := "lon=" + lon
 	fullUrl := url + "?" + latitude + "&" + longitude + "&" + units + "&" + key
-	responseMap := json(fullUrl)
+	client := http.Client{
+		Timeout: time.Second * 2,
+	}
+	responseMap := json(fullUrl, &client)
 	return fmt.Sprintf("%v", responseMap["weather"].([]interface{})[0].(map[string]interface{})["main"]),
 	fmt.Sprintf("%v", responseMap["main"].(map[string]interface{})["temp"])
 }

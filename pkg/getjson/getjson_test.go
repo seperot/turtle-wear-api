@@ -3,6 +3,7 @@ package getjson
 import (
 	"fmt"
 	"net/http"
+	"net/http/httptest"
 	"testing"
 )
 
@@ -15,10 +16,8 @@ func handler(response []byte) http.HandlerFunc {
 func TestMapSuccess(t *testing.T) {
 	stubbedResponse := []byte(`{"Test": { "Jeff": "Heff"}}`)
 	handler := handler(stubbedResponse)
-	go func() {
-		_ = http.ListenAndServe(":8080", handler)
-	}()
-	result := fmt.Sprintf("%v", Map("http://:8080")["Test"].(map[string]interface{})["Jeff"])
+	server := httptest.NewServer(handler)
+	result := fmt.Sprintf("%v", Map(server.URL, server.Client())["Test"].(map[string]interface{})["Jeff"])
 	if result != "Heff" {
 		t.Error("OH NO")
 	}
