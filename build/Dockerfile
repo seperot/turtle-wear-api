@@ -8,6 +8,7 @@ WORKDIR $GOPATH/src/turtle-wear-api
 COPY . .
 
 RUN go mod download && go mod verify
+RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go test -cover ./...
 RUN GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o /go/bin/turtle-wear-api ./cmd/turtle-functions/main.go
 
 FROM scratch

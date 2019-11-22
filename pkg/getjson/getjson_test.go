@@ -16,9 +16,9 @@ func TestMapSuccess(t *testing.T) {
 	stubbedResponse := []byte(`{"Test": { "Jeff": "Heff"}}`)
 	handler := handler(stubbedResponse)
 	go func() {
-		_ = http.ListenAndServe(":9021", handler)
+		_ = http.ListenAndServe(":8080", handler)
 	}()
-	result := fmt.Sprintf("%v", Map("http://localhost:9021")["Test"].(map[string]interface{})["Jeff"])
+	result := fmt.Sprintf("%v", Map("http://:8080")["Test"].(map[string]interface{})["Jeff"])
 	if result != "Heff" {
 		t.Error("OH NO")
 	}
