@@ -40,7 +40,7 @@ func handleEvent() http.HandlerFunc {
 			w.WriteHeader(http.StatusNotFound)
 			_ , err = w.Write([]byte(`{"error": "nothing found"}`))
 		}
-		
+
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
