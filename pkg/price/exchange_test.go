@@ -25,7 +25,7 @@ func TestTradeOgre(t *testing.T) {
 	}
 }
 
-func Test_kuCoin(t *testing.T) {
+func TestKuCoin(t *testing.T) {
 	stubbedResponse = []byte(`{"data": {"last": "12.1"}}`)
 	result := kuCoin(testJsonRetriever)
 	if result != "12.1" {

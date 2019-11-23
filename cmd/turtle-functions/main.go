@@ -31,24 +31,18 @@ func handleEvent() http.HandlerFunc {
 			_ , err = w.Write([]byte(`{"error": "nothing found"}`))
 		}
 
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-		}
-
 		switch r.Method {
 		case "GET":
 			w.WriteHeader(http.StatusOK)
 			w.Header().Set("Content-Type", "application/json")
 			_ , err = w.Write(js)
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusInternalServerError)
-			}
 		default:
 			w.WriteHeader(http.StatusNotFound)
 			_ , err = w.Write([]byte(`{"error": "nothing found"}`))
-			if err != nil {
-				http.Error(w, err.Error(), http.StatusInternalServerError)
-			}
+		}
+		
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	}
 }
