@@ -7,11 +7,11 @@ import (
 
 func TestGetter(t *testing.T) {
 	result := Getter("1","1", testRetriever, getjson.Map)
-	if result.Temp != "hot af"{
+	if result.Icon != "sunny" || result.Temp != "12"{
 		t.Error("got", result)
 	}
 }
 
 func testRetriever(lat string, lon string, json getjson.RetrieveJson) (string, string) {
-	return "sunny", "hot af"
+	return "sunny", "12.34"
 }
