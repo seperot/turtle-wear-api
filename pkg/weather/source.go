@@ -20,6 +20,6 @@ func OpenWeather(lat string, lon string, json getjson.RetrieveJson) (string, str
 		Timeout: time.Second * 2,
 	}
 	responseMap := json(fullUrl, &client)
-	return fmt.Sprintf("%v", responseMap["weather"].([]interface{})[0].(map[string]interface{})["main"]),
+	return fmt.Sprintf("%v", responseMap["weather"].([]interface{})[0].(map[string]interface{})["icon"]),
 	fmt.Sprintf("%v", responseMap["main"].(map[string]interface{})["temp"])
 }
