@@ -8,4 +8,4 @@ Simple api calls for the Android WearOS project [turtle-wear](https://github.com
 You can find the [swagger docs here](https://app.swaggerhub.com/apis-docs/ijhdev/turtle-wear-api/1.0.0)
 
 ## Flow
-![flowmap](https://raw.githubusercontent.com/Seperot/turtle-wear-api/docs/flowmap.png)
+![flowmap](https://raw.githubusercontent.com/Seperot/turtle-wear-api/master/docs/flowmap.png)
