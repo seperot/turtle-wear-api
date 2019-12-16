@@ -7,5 +7,8 @@ Simple api calls for the Android WearOS project [turtle-wear](https://github.com
 
 You can find the [swagger docs here](https://app.swaggerhub.com/apis-docs/ijhdev/turtle-wear-api/1.0.0)
 
+## How it's made
+You can check out [how the code was made here](https://ijh.dev/middlewear-go/) and then [how the pipeline for deployments works here](https://ijh.dev/open-source-pipeline/)
+
 ## Flow
 ![flowmap](https://raw.githubusercontent.com/Seperot/turtle-wear-api/master/docs/flowmap.png)
